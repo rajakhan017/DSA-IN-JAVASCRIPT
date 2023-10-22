@@ -1,0 +1,184 @@
+<!-- Question List:- WEEKLY-TEST-1
+
+Q 1. String Reversal: Write a function to reverse a given string in JavaScript without using built-in reverse functions.
+Q 2. Anagram Check: Implement an algorithm to check if two strings are anagrams of each other (contain the same characters with the same frequency)
+Q 3. Array Intersection: Given two arrays, write a function to find their intersection (common elements).
+Q 4. String Palindrome: Create a function to check if a given string is a palindrome (reads the same forwards and backwards) while ignoring non-alphanumeric characters.
+Q 5. Array Rotation: Implement a function to rotate an array to the right by a specified number of positions.
+Q 6. String Compression: Write a function to perform basic string compression using the counts of repeated characters. For example, "aabcccccaaa" would become "a2b1c5a3."
+Q 7. Array Sum: Write an algorithm to find the pair of elements in an array that adds up to a specific target sum.
+Q 8. Longest Substring Without Repeating Characters: Write an algorithm to find the length of the longest substring without repeating characters in a given string. -->
+
+
+
+<!-- function reverseString(inputString) {
+    let reversedString = "";
+    for (let i = inputString.length - 1; i >= 0; i--) {
+      reversedString += inputString[i];
+    }
+    return reversedString;
+   }
+   
+   // Example usage:
+   const originalString = "Hello, World!";
+   const reversed = reverseString(originalString);
+   console.log(reversed); // Outputs: "!dlroW ,olleH" -->
+
+
+   <!-- function areAnagrams(str1, str2) {
+    // Remove spaces and convert to lowercase to ensure case-insensitive comparison
+    str1 = str1.replace(/\s/g, "").toLowerCase();
+    str2 = str2.replace(/\s/g, "").toLowerCase();
+   
+    // If the lengths of the two strings are different, they can't be anagrams
+    if (str1.length !== str2.length) {
+      return false;
+    }
+   
+    const charFrequency = {};
+   
+    // Count the frequency of characters in the first string
+    for (let char of str1) {
+      charFrequency[char] = (charFrequency[char] || 0) + 1;
+    }
+   
+    // Compare the frequency with the second string
+    for (let char of str2) {
+      if (!charFrequency[char]) {
+        return false; // If a character is not found in the frequency object, they are not anagrams
+      }
+      charFrequency[char]--;
+    }
+   
+    return true;
+   }
+   
+   // Example usage:
+   const string1 = "listen";
+   const string2 = "silent";
+   console.log(areAnagrams(string1, string2)); // Outputs: true -->
+
+
+   <!-- function findIntersection(arr1, arr2) {
+    const intersection = [];
+   
+    for (const element of arr1) {
+      if (arr2.includes(element) && !intersection.includes(element)) {
+        intersection.push(element);
+      }
+    }
+   
+    return intersection;
+   }
+   
+   // Example usage:
+   const array1 = [1, 2, 3, 4, 5];
+   const array2 = [3, 4, 5, 6, 7];
+   const result = findIntersection(array1, array2);
+   console.log(result); // Outputs: [3, 4, 5] -->
+
+
+
+   <!-- function isPalindrome(str) {
+    // Remove non-alphanumeric characters and convert to lowercase
+    const sanitizedStr = str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+   
+    // Compare the sanitized string with its reverse
+    return sanitizedStr === sanitizedStr.split('').reverse().join('');
+   }
+   
+   // Example usage:
+   const palindromeString = "A man, a plan, a canal, Panama";
+   console.log(isPalindrome(palindromeString)); // Outputs: true -->
+
+
+   <!-- function rotateArrayRight(arr, positions) {
+    if (arr.length === 0) {
+      return arr; // Nothing to rotate for an empty array
+    }
+   
+    const n = arr.length;
+    positions = positions % n; // Handle cases where positions are greater than the array length
+   
+    // Slice the array into two parts and concatenate them in the reversed order
+    const rotatedArray = arr.slice(n - positions).concat(arr.slice(0, n - positions));
+   
+    return rotatedArray;
+   }
+   
+   // Example usage:
+   const originalArray = [1, 2, 3, 4, 5];
+   const rotated = rotateArrayRight(originalArray, 2);
+   console.log(rotated); // Outputs: [4, 5, 1, 2, 3] -->
+
+
+
+   <!-- function compressString(str) {
+    let compressed = "";
+    let count = 1;
+   
+    for (let i = 0; i < str.length; i++) {
+      if (str[i] === str[i + 1]) {
+        count++;
+      } else {
+        compressed += str[i] + count;
+        count = 1;
+      }
+    }
+   
+    return compressed.length < str.length ? compressed : str;
+   }
+   
+   // Example usage:
+   const originalString = "aabcccccaaa";
+   const compressed = compressString(originalString);
+   console.log(compressed); // Outputs: "a2b1c5a3" -->
+
+
+   <!-- function findPairWithSum(arr, targetSum) {
+    const pairs = [];
+   
+    for (let i = 0; i < arr.length - 1; i++) {
+      for (let j = i + 1; j < arr.length; j++) {
+        if (arr[i] + arr[j] === targetSum) {
+          pairs.push([arr[i], arr[j]]);
+        }
+      }
+    }
+   
+    return pairs;
+   }
+   
+   // Example usage:
+   const inputArray = [2, 4, 3, 7, 1, 5, 9];
+   const targetSum = 8;
+   const pairs = findPairWithSum(inputArray, targetSum);
+   console.log(pairs); // Outputs: [ [2, 6], [4, 4] ] -->
+
+
+   <!-- function lengthOfLongestSubstring(s) {
+    const n = s.length;
+    let maxLength = 0;
+    let start = 0;
+    const charIndexMap = {};
+   
+    for (let end = 0; end < n; end++) {
+      const currentChar = s[end];
+   
+      if (charIndexMap[currentChar] !== undefined) {
+        // If the current character has been seen before, move the start of the window to the right of the previous occurrence
+        start = Math.max(start, charIndexMap[currentChar] + 1);
+      }
+   
+      charIndexMap[currentChar] = end; // Update the last seen index of the character
+      maxLength = Math.max(maxLength, end - start + 1);
+    }
+   
+    return maxLength;
+   }
+   
+   // Example usage:
+   const inputString = "abcabcbb";
+   const longestLength = lengthOfLongestSubstring(inputString);
+   console.log(longestLength); // Outputs: 3 -->
+   
